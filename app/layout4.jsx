@@ -3,6 +3,7 @@ import React from "react";
 
 const Layout4 = () => {
   return (
+    <>
     <View style={styles.container}>
       {/* Top full-width box */}
       <View style={[styles.item, { marginBottom: 5 }]}></View>
@@ -26,6 +27,7 @@ const Layout4 = () => {
         </View>
       </View>
     </View>
+    </>
   );
 };
 
