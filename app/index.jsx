@@ -13,7 +13,7 @@ const Home = () => {
         />
         <Link href="/about" asChild>
           <Pressable style={styles.buttonAbout}>
-            <Text style={styles.buttonText}>About Yours 📮</Text>
+            <Text style={styles.buttonText}>About Me 📮</Text>
           </Pressable>
         </Link>
         <Link href="/designs" asChild>
@@ -39,6 +39,11 @@ const Home = () => {
         <Link href="/countonclick" asChild>
           <Pressable style={styles.button}>
             <Text style={styles.buttonText}>Count On Click 🔢</Text>
+          </Pressable>
+        </Link>
+        <Link href="/rgbcolor" asChild>
+          <Pressable style={styles.button}>
+            <Text style={styles.buttonText}>RGB Picker 🌈</Text>
           </Pressable>
         </Link>
       </View>

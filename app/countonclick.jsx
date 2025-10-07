@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { View, Text, TouchableOpacity, StyleSheet, TextInput } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import Slider from "@react-native-community/slider";
 
 const CountOnClick = () => {
   const [count, setCount] = useState(0);
@@ -49,18 +50,16 @@ const CountOnClick = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.countText}>{count}</Text>
-      <TextInput
-        style={styles.input}
-        value={maxCount.toString()}
-        onChangeText={(text) => {
-          const num = parseInt(text, 10);
-          if (!isNaN(num) && num >= 0) {
-            setMaxCount(num);
-            if (count > num) setCount(num); // adjust count if exceeds new max
-          }
-        }}
-        keyboardType="numeric"
-        placeholder="Set max count"
+      <Text style={styles.label}>Max Count: {maxCount}</Text>
+      <Slider
+        style={styles.slider}
+        minimumValue={0}
+        maximumValue={100}
+        value={maxCount}
+        minimumTrackTintColor="#007AFF"
+        maximumTrackTintColor="#ccc"
+        thumbTintColor="#007AFF"
+        onValueChange={(value) => setMaxCount(Math.round(value))}
       />
       <TouchableOpacity
         style={[
@@ -114,13 +113,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
   },
-  input: {
-    width: 100,
+  label: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#333",
+    marginBottom: 5,
+  },
+  slider: {
+    width: 250,
     height: 40,
-    borderColor: "#ccc",
-    borderWidth: 1,
-    borderRadius: 8,
-    textAlign: "center",
     marginBottom: 20,
   },
 });
