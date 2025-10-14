@@ -1,12 +1,21 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TextInput } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TextInput,
+  useColorScheme,
+  Switch,
+} from "react-native";
 import Slider from "@react-native-community/slider";
+import { Colors } from "../constants/colors";
 
 const RGBColorMixer = () => {
   const [red, setRed] = useState(128);
   const [green, setGreen] = useState(128);
   const [blue, setBlue] = useState(128);
   const [text, setText] = useState("");
+  const [isEnabled, setIsEnabled] = useState(false);
 
   const color = `rgb(${red}, ${green}, ${blue})`;
 
@@ -15,8 +24,11 @@ const RGBColorMixer = () => {
     return brightness > 128 ? "#000" : "#fff";
   };
 
+  const colorScheme = useColorScheme();
+  const theme = Colors[colorScheme] ?? Colors.light;
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
       {/* Text Input Display Box */}
       <TextInput
         style={[
@@ -32,10 +44,18 @@ const RGBColorMixer = () => {
         }
         value={text}
         onChangeText={setText}
+        multiline
+        numberOfLines={4}
+        textAlignVertical="top"
       />
 
-      {/* RGB Sliders in Column Style */}
-      <View style={styles.slidersWrapper}>
+      {/* RGB Sliders */}
+      <View
+        style={[
+          styles.slidersWrapper,
+          { opacity: isEnabled ? 1 : 0.4 }, // 👈 dims when disabled
+        ]}
+      >
         <View style={styles.sliderRow}>
           <Text style={[styles.letter, { color: "red" }]}>R</Text>
           <Slider
@@ -46,7 +66,9 @@ const RGBColorMixer = () => {
             minimumTrackTintColor="red"
             maximumTrackTintColor="#ddd"
             thumbTintColor="red"
-            onValueChange={(value) => setRed(Math.round(value))}
+            onValueChange={(value) => {
+              if (isEnabled) setRed(Math.round(value)); // 👈 only works when toggle is on
+            }}
           />
           <Text style={styles.valueText}>{red}</Text>
         </View>
@@ -61,7 +83,9 @@ const RGBColorMixer = () => {
             minimumTrackTintColor="green"
             maximumTrackTintColor="#ddd"
             thumbTintColor="green"
-            onValueChange={(value) => setGreen(Math.round(value))}
+            onValueChange={(value) => {
+              if (isEnabled) setGreen(Math.round(value));
+            }}
           />
           <Text style={styles.valueText}>{green}</Text>
         </View>
@@ -76,10 +100,26 @@ const RGBColorMixer = () => {
             minimumTrackTintColor="blue"
             maximumTrackTintColor="#ddd"
             thumbTintColor="blue"
-            onValueChange={(value) => setBlue(Math.round(value))}
+            onValueChange={(value) => {
+              if (isEnabled) setBlue(Math.round(value));
+            }}
           />
           <Text style={styles.valueText}>{blue}</Text>
         </View>
+      </View>
+
+      {/* Toggle Switch */}
+      <View style={styles.toggleContainer}>
+        <Text style={styles.toggleLabel}>
+          {isEnabled ? "Color Mixer ON" : "Color Mixer OFF"}
+        </Text>
+        <Switch
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={isEnabled ? "#007AFF" : "#f4f3f4"}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={setIsEnabled}
+          value={isEnabled}
+        />
       </View>
     </View>
   );
@@ -139,6 +179,18 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     textAlign: "right",
     color: "#333",
+  },
+  toggleContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 30,
+  },
+  toggleLabel: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#333",
+    marginRight: 10,
   },
 });
 

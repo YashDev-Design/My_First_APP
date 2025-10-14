@@ -1,14 +1,16 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import React from "react";
 import { Link } from "expo-router";
-import AppLogo from "../assets/images/logo.png";
+import ViewThemes from "../components/ViewThemes";
+import LogoThemes from "../components/LogoThemes";
 
 const Home = () => {
   return (
     <>
-      <View style={styles.linkContainer}>
+      <ViewThemes style={styles.linkContainer}>
+        <LogoThemes />
         <Image
-          source={AppLogo}
+          source={LogoThemes}
           style={{ width: 130, height: 65, marginBottom: 5 }}
         />
         <Link href="/about" asChild>
@@ -46,7 +48,12 @@ const Home = () => {
             <Text style={styles.buttonText}>RGB Picker 🌈</Text>
           </Pressable>
         </Link>
-      </View>
+        <Link href="/tiles" asChild>
+          <Pressable style={styles.button}>
+            <Text style={styles.buttonText}>Tiles Game 🎴</Text>
+          </Pressable>
+        </Link>
+      </ViewThemes>
     </>
   );
 };
