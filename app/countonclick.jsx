@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import Slider from "@react-native-community/slider";
 
 const CountOnClick = () => {
@@ -71,13 +71,31 @@ const CountOnClick = () => {
             if (count < maxCount) {
               setCount(count + 1);
             } else if (count === maxCount) {
-              setIsIncreasing(false);
+              Alert.alert(
+                "Max Limit Reached",
+                "You’ve reached the max limit to increase.",
+                [
+                  {
+                    text: "OK",
+                    onPress: () => setIsIncreasing(false),
+                  },
+                ]
+              );
             }
           } else {
             if (count > 0) {
               setCount(count - 1);
             } else if (count === 0) {
-              setIsIncreasing(true);
+              Alert.alert(
+                "Min Limit Reached",
+                "You’ve reached the minimum limit to decrease.",
+                [
+                  {
+                    text: "OK",
+                    onPress: () => setIsIncreasing(true),
+                  },
+                ]
+              );
             }
           }
         }}

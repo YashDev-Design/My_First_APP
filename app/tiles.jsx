@@ -1,59 +1,98 @@
 import React, { useState } from "react";
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  Dimensions,
+  Alert,
+} from "react-native";
+
+const { width } = Dimensions.get("window");
+const tileSize = width / 5.5;
 
 export default function Tiles() {
-  const letters = ["J", "A", "R", "V"];
-  const [flipped, setFlipped] = useState(Array(letters.length).fill(false));
+  const n = 12; // Total number of tiles (must be even)
+  const uniqueCount = n / 2;
+
+  const [numbers] = useState(() => {
+    const baseNumbers = Array.from({ length: uniqueCount }, (_, i) => i + 1);
+    const shuffled = [...baseNumbers, ...baseNumbers].sort(
+      () => Math.random() - 0.5
+    );
+    return shuffled;
+  });
+
+  const [flipped, setFlipped] = useState(Array(numbers.length).fill(false));
+  const [matched, setMatched] = useState(Array(numbers.length).fill(false));
   const [openTiles, setOpenTiles] = useState([]);
 
   const handleTilePress = (index) => {
-    // If this tile is already open, ignore
-    if (openTiles.includes(index)) return;
+    if (flipped[index] || matched[index]) return; // Ignore if tile is already flipped or matched
+    if (openTiles.length === 2) return;
 
-    // If two tiles are already open, reset and open the new one
-    if (openTiles.length === 2) {
-      const reset = Array(letters.length).fill(false);
-      const newFlipped = [...reset];
-      newFlipped[index] = true;
-      setFlipped(newFlipped);
-      setOpenTiles([index]);
-    } else {
-      // Otherwise, open this tile normally
-      const newFlipped = [...flipped];
-      newFlipped[index] = true;
-      setFlipped(newFlipped);
-      setOpenTiles([...openTiles, index]);
+    const newFlipped = [...flipped];
+    newFlipped[index] = true;
+    const newOpenTiles = [...openTiles, index];
+    setFlipped(newFlipped);
+    setOpenTiles(newOpenTiles);
+
+    // When 2 tiles are open
+    if (newOpenTiles.length === 2) {
+      const [first, second] = newOpenTiles;
+      if (numbers[first] === numbers[second]) {
+        // It's a match!
+        const newMatched = [...matched];
+        newMatched[first] = true;
+        newMatched[second] = true;
+        setMatched(newMatched);
+        setOpenTiles([]);
+
+        // Check for win condition
+        if (newMatched.every((val) => val)) {
+          setTimeout(() => {
+            Alert.alert("🎉 You Won!", "All matching tiles are found!");
+          }, 400);
+        }
+      } else {
+        // Not a match — flip back after short delay
+        setTimeout(() => {
+          const resetFlipped = [...newFlipped];
+          resetFlipped[first] = false;
+          resetFlipped[second] = false;
+          setFlipped(resetFlipped);
+          setOpenTiles([]);
+        }, 800);
+      }
     }
   };
 
   return (
-    <Pressable
-      style={styles.container}
-      onPress={() => {
-        setFlipped(Array(letters.length).fill(false));
-        setOpenTiles([]);
-      }}
-    >
+    <View style={styles.container}>
       <View style={styles.grid}>
-        {letters.map((letter, index) => (
+        {numbers.map((num, index) => (
           <Pressable
             key={index}
             style={[
               styles.tile,
               flipped[index] ? styles.tileRevealed : styles.tileHidden,
+              matched[index] && styles.tileMatched,
             ]}
-            onPress={(e) => {
-              e.stopPropagation();
-              handleTilePress(index);
-            }}
+            onPress={() => handleTilePress(index)}
+            disabled={matched[index]}
           >
-            <Text style={[styles.letter, { opacity: flipped[index] ? 1 : 0 }]}>
-              {letter}
+            <Text
+              style={[
+                styles.letter,
+                { opacity: flipped[index] || matched[index] ? 1 : 0 },
+              ]}
+            >
+              {num}
             </Text>
           </Pressable>
         ))}
       </View>
-    </Pressable>
+    </View>
   );
 }
 
@@ -69,21 +108,20 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center",
-    columnGap: 20,
-    rowGap: 20,
-    width: 240,
+    gap: 12,
+    width: "90%",
   },
   tile: {
-    width: 100,
-    height: 100,
-    borderRadius: 16,
+    width: tileSize,
+    height: tileSize,
+    borderRadius: 14,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#D1D1D6",
     shadowColor: "#000",
     shadowOpacity: 0.15,
-    shadowRadius: 10,
-    elevation: 4,
-    transition: "all 0.3s",
+    shadowRadius: 8,
+    elevation: 3,
   },
   tileHidden: {
     backgroundColor: "#D1D1D6",
@@ -91,8 +129,12 @@ const styles = StyleSheet.create({
   tileRevealed: {
     backgroundColor: "#FFFFFF",
   },
+  tileMatched: {
+    backgroundColor: "#E0E0E0",
+    opacity: 0.5,
+  },
   letter: {
-    fontSize: 64,
+    fontSize: 40,
     fontWeight: "600",
     color: "#000000",
   },

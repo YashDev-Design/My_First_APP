@@ -53,6 +53,11 @@ const Home = () => {
             <Text style={styles.buttonText}>Tiles Game 🎴</Text>
           </Pressable>
         </Link>
+        <Link href="/alertform" asChild>
+          <Pressable style={styles.button}>
+            <Text style={styles.buttonText}>Alert Form 💬</Text>
+          </Pressable>
+        </Link>
       </ViewThemes>
     </>
   );
