@@ -7,11 +7,14 @@ import {
   Dimensions,
   Alert,
 } from "react-native";
+import { useTheme } from "../context/ThemeContext";
 
 const { width } = Dimensions.get("window");
 const tileSize = width / 5.5;
 
 export default function Tiles() {
+  const { theme } = useTheme();
+
   const n = 12; // Total number of tiles (must be even)
   const uniqueCount = n / 2;
 
@@ -68,15 +71,22 @@ export default function Tiles() {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
       <View style={styles.grid}>
         {numbers.map((num, index) => (
           <Pressable
             key={index}
             style={[
               styles.tile,
-              flipped[index] ? styles.tileRevealed : styles.tileHidden,
-              matched[index] && styles.tileMatched,
+              flipped[index]
+                ? { backgroundColor: theme.surface || "#FFFFFF" }
+                : { backgroundColor: theme.card || "#D1D1D6" },
+              matched[index] && {
+                backgroundColor: theme.card
+                  ? `${theme.card}80`
+                  : "rgba(209, 209, 214, 0.5)",
+                opacity: 0.5,
+              },
             ]}
             onPress={() => handleTilePress(index)}
             disabled={matched[index]}
@@ -84,7 +94,10 @@ export default function Tiles() {
             <Text
               style={[
                 styles.letter,
-                { opacity: flipped[index] || matched[index] ? 1 : 0 },
+                {
+                  opacity: flipped[index] || matched[index] ? 1 : 0,
+                  color: theme.text,
+                },
               ]}
             >
               {num}
@@ -101,7 +114,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F9F9F9",
   },
   grid: {
     flexDirection: "row",
@@ -117,25 +129,13 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#D1D1D6",
     shadowColor: "#000",
     shadowOpacity: 0.15,
     shadowRadius: 8,
     elevation: 3,
   },
-  tileHidden: {
-    backgroundColor: "#D1D1D6",
-  },
-  tileRevealed: {
-    backgroundColor: "#FFFFFF",
-  },
-  tileMatched: {
-    backgroundColor: "#E0E0E0",
-    opacity: 0.5,
-  },
   letter: {
     fontSize: 40,
     fontWeight: "600",
-    color: "#000000",
   },
 });

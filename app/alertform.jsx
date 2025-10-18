@@ -7,8 +7,10 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
+import { useTheme } from "../context/ThemeContext";
 
 const AlertForm = () => {
+  const { theme } = useTheme();
   const [name, setName] = useState("");
   const [mood, setMood] = useState(null);
 
@@ -36,14 +38,23 @@ const AlertForm = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>How are you feeling today?</Text>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
+      <Text style={[styles.heading, { color: theme.text }]}>
+        How are you feeling today?
+      </Text>
 
       {/* Name Input */}
       <TextInput
-        style={styles.input}
+        style={[
+          styles.input,
+          {
+            color: theme.text,
+            borderColor: theme.card,
+            backgroundColor: theme.card,
+          },
+        ]}
         placeholder="Enter your name..."
-        placeholderTextColor="#999"
+        placeholderTextColor={theme.text}
         value={name}
         onChangeText={setName}
       />
@@ -55,12 +66,19 @@ const AlertForm = () => {
             key={index}
             style={[
               styles.moodButton,
-              mood?.label === m.label && styles.moodButtonSelected,
+              { backgroundColor: theme.card, borderColor: theme.card },
+              mood?.label === m.label && {
+                backgroundColor: theme.background + "20",
+                borderColor: theme.text,
+                borderWidth: 2,
+              },
             ]}
             onPress={() => setMood(m)}
             activeOpacity={0.7}
           >
-            <Text style={styles.moodEmoji}>{m.emoji}</Text>
+            <Text style={[styles.moodEmoji, { color: theme.text }]}>
+              {m.emoji}
+            </Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -83,7 +101,6 @@ const AlertForm = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f2f2f7",
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
@@ -92,18 +109,14 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: "700",
     marginBottom: 25,
-    color: "#333",
   },
   input: {
     width: "85%",
     height: 50,
     borderRadius: 12,
     borderWidth: 1.2,
-    borderColor: "#ccc",
     paddingHorizontal: 15,
     fontSize: 18,
-    backgroundColor: "#fff",
-    color: "#333",
     marginBottom: 30,
     shadowColor: "#000",
     shadowOpacity: 0.08,
@@ -120,7 +133,6 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 35,
-    backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
     shadowColor: "#000",
@@ -128,11 +140,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 3 },
     shadowRadius: 6,
     elevation: 3,
-  },
-  moodButtonSelected: {
-    backgroundColor: "#007AFF20",
-    borderColor: "#007AFF",
-    borderWidth: 2,
+    borderWidth: 1,
   },
   moodEmoji: {
     fontSize: 35,

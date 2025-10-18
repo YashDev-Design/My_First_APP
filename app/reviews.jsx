@@ -1,17 +1,24 @@
 import { StyleSheet, Text, View, FlatList, Image } from "react-native";
 import { reviews } from "../data/user_posts";
+import { useTheme } from "../context/ThemeContext";
 
 const ReviewCard = ({ title, imageUrl, description }) => {
+  const { theme } = useTheme();
+
   const renderItem = ({ item }) => (
-    <View style={styles.card}>
-      <Text style={styles.cardTitle}>{item.title}</Text>
+    <View style={[styles.card, { backgroundColor: theme.card }]}>
+      <Text style={[styles.cardTitle, { color: theme.text }]}>
+        {item.title}
+      </Text>
       <Image source={{ uri: item.imageUrl }} style={styles.cardImage} />
-      <Text style={styles.cardDescription}>{item.description}</Text>
+      <Text style={[styles.cardDescription, { color: theme.text }]}>
+        {item.description}
+      </Text>
     </View>
   );
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
       <FlatList
         data={reviews}
         renderItem={renderItem}

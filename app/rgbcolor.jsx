@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TextInput,
-  useColorScheme,
-  Switch,
-} from "react-native";
+import { View, StyleSheet, Text, TextInput, Switch } from "react-native";
 import Slider from "@react-native-community/slider";
-import { Colors } from "../constants/colors";
+import { useTheme } from "../context/ThemeContext";
 
 const RGBColorMixer = () => {
   const [red, setRed] = useState(128);
@@ -24,8 +17,7 @@ const RGBColorMixer = () => {
     return brightness > 128 ? "#000" : "#fff";
   };
 
-  const colorScheme = useColorScheme();
-  const theme = Colors[colorScheme] ?? Colors.light;
+  const { theme } = useTheme();
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
@@ -53,7 +45,10 @@ const RGBColorMixer = () => {
       <View
         style={[
           styles.slidersWrapper,
-          { opacity: isEnabled ? 1 : 0.4 }, // 👈 dims when disabled
+          {
+            opacity: isEnabled ? 1 : 0.4, // 👈 dims when disabled
+            backgroundColor: theme.card ?? theme.background,
+          },
         ]}
       >
         <View style={styles.sliderRow}>
@@ -70,7 +65,7 @@ const RGBColorMixer = () => {
               if (isEnabled) setRed(Math.round(value)); // 👈 only works when toggle is on
             }}
           />
-          <Text style={styles.valueText}>{red}</Text>
+          <Text style={[styles.valueText, { color: theme.text }]}>{red}</Text>
         </View>
 
         <View style={styles.sliderRow}>
@@ -87,7 +82,7 @@ const RGBColorMixer = () => {
               if (isEnabled) setGreen(Math.round(value));
             }}
           />
-          <Text style={styles.valueText}>{green}</Text>
+          <Text style={[styles.valueText, { color: theme.text }]}>{green}</Text>
         </View>
 
         <View style={styles.sliderRow}>
@@ -104,13 +99,13 @@ const RGBColorMixer = () => {
               if (isEnabled) setBlue(Math.round(value));
             }}
           />
-          <Text style={styles.valueText}>{blue}</Text>
+          <Text style={[styles.valueText, { color: theme.text }]}>{blue}</Text>
         </View>
       </View>
 
       {/* Toggle Switch */}
       <View style={styles.toggleContainer}>
-        <Text style={styles.toggleLabel}>
+        <Text style={[styles.toggleLabel, { color: theme.text }]}>
           {isEnabled ? "Color Mixer ON" : "Color Mixer OFF"}
         </Text>
         <Switch

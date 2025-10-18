@@ -4,8 +4,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import Slider from "@react-native-community/slider";
+import { useTheme } from "../context/ThemeContext";
 
 const CountOnClick = () => {
+  const { theme } = useTheme();
   const [count, setCount] = useState(0);
   const [isIncreasing, setIsIncreasing] = useState(true);
   const [maxCount, setMaxCount] = useState(10);
@@ -48,9 +50,11 @@ const CountOnClick = () => {
   }, [count, isIncreasing, maxCount]);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.countText}>{count}</Text>
-      <Text style={styles.label}>Max Count: {maxCount}</Text>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
+      <Text style={[styles.countText, { color: theme.text }]}>{count}</Text>
+      <Text style={[styles.label, { color: theme.text }]}>
+        Max Count: {maxCount}
+      </Text>
       <Slider
         style={styles.slider}
         minimumValue={0}
@@ -113,12 +117,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F2F2F7",
   },
   countText: {
     fontSize: 48,
     fontWeight: "600",
-    color: "#1C1C1E",
   },
   button: {
     paddingVertical: 12,
@@ -134,7 +136,6 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     fontWeight: "500",
-    color: "#333",
     marginBottom: 5,
   },
   slider: {

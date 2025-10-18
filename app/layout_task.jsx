@@ -1,35 +1,51 @@
-import React from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
-import { Link } from 'expo-router';
+import {
+  View,
+  Text,
+  Pressable,
+  useColorScheme,
+  StyleSheet,
+} from "react-native";
+import { useRouter } from "expo-router";
+import { Colors } from "../constants/colors";
 
 const LayoutTask = () => {
+  const router = useRouter();
+  const colorScheme = useColorScheme();
+  const theme = Colors[colorScheme] ?? Colors.light;
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>Choose a Layout</Text>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
+      <Text style={[styles.heading, { color: theme.text }]}>
+        Choose a Layout
+      </Text>
 
-      <Link href="/layout1" asChild>
-        <Pressable style={styles.buttonLayout1}>
-          <Text style={styles.buttonText}>Layout 1</Text>
-        </Pressable>
-      </Link>
+      <Pressable
+        style={[styles.button, { backgroundColor: "#1A237E" }]}
+        onPress={() => router.push("layout1")}
+      >
+        <Text style={styles.buttonText}>Layout 1</Text>
+      </Pressable>
 
-      <Link href="/layout2" asChild>
-        <Pressable style={styles.buttonLayout2}>
-          <Text style={styles.buttonText}>Layout 2</Text>
-        </Pressable>
-      </Link>
+      <Pressable
+        style={[styles.button, { backgroundColor: "#00695C" }]}
+        onPress={() => router.push("layout2")}
+      >
+        <Text style={styles.buttonText}>Layout 2</Text>
+      </Pressable>
 
-      <Link href="/layout3" asChild>
-        <Pressable style={styles.buttonLayout3}>
-          <Text style={styles.buttonText}>Layout 3</Text>
-        </Pressable>
-      </Link>
+      <Pressable
+        style={[styles.button, { backgroundColor: "#37474F" }]}
+        onPress={() => router.push("layout3")}
+      >
+        <Text style={styles.buttonText}>Layout 3</Text>
+      </Pressable>
 
-      <Link href="/layout4" asChild>
-        <Pressable style={styles.buttonLayout4}>
-          <Text style={styles.buttonText}>Layout 4</Text>
-        </Pressable>
-      </Link>
+      <Pressable
+        style={[styles.button, { backgroundColor: "#800020" }]}
+        onPress={() => router.push("layout4")}
+      >
+        <Text style={styles.buttonText}>Layout 4</Text>
+      </Pressable>
     </View>
   );
 };
@@ -39,53 +55,26 @@ export default LayoutTask;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 20,
   },
   heading: {
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
   },
-  buttonLayout1: {
-    backgroundColor: '#1A237E',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-    marginVertical: 6,
-  },
-  buttonLayout2: {
-    backgroundColor: '#00695C',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-    marginVertical: 6,
-  },
-  buttonLayout3: {
-    backgroundColor: '#37474F',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-    marginVertical: 6,
-  },
-  buttonLayout4: {
-    backgroundColor: '#800020',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-    marginVertical: 6,
-  },
   button: {
-    backgroundColor: '#007AFF',
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,
     marginVertical: 6,
+    width: 200,
+    alignItems: "center",
   },
   buttonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });
