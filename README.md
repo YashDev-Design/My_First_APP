@@ -25,7 +25,7 @@ This app showcases essential mobile development principles including seamless na
 
 ### 🧠 Highlighted Screens
 
-- 🎨 **Colorizer:** Interactive RGB sliders for live color mixing and visualization.
+- 🎨 **RGB Color Mixer:** Interactive RGB sliders for live color mixing and visualization.
 - 🎯 **Tiles Game:** Engaging memory-matching tiles with smooth win animations.
 - 🔢 **Counter:** Smart increment/decrement functionality with persistent storage using AsyncStorage.
 
