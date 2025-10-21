@@ -1,141 +1,160 @@
-# 📱 My First App — React Native + Expo Router  
+# 📱 My First App — React Native + Expo Router
 
 **Developer:** [Javeed Mohammad (Yash-Dev)](https://github.com/YashDev-Design)  
-**Course:** Mobile Computing | AUM Graduate Project  
+**Course:** Mobile Computing | AUM Graduate Project
 
 ---
 
-## 🧩 Overview  
+## 🧩 Overview
 
-This app is a **multi-screen React Native project** built with **Expo Router**.  
-It demonstrates key mobile development concepts like navigation, persistent state, and global theming.
-
----
-
-## 🚀 Features  
-
-### 🎨 Global Light & Dark Theme  
-- Uses a custom `ThemeContext`.  
-- Includes theme persistence and dynamic color updates for headers, text, and backgrounds.  
-
-### 📂 Drawer Navigation (Hamburger Menu)  
-- Access all screens from a sleek, responsive sidebar menu.  
-
-### 🧠 Interactive Screens  
-- 🖍️ **RGB Color Mixer:** Adjust RGB sliders to see real-time color changes.  
-- 🔢 **Counter:** Smart increment/decrement with persistent storage using AsyncStorage.  
-- 🎯 **Tiles Game:** Memory-matching tiles with win animations.  
-- 😊 **Alert Form:** Mood form with emoji selection and pop-up alerts.  
-- 💬 **Reviews:** Displays user posts dynamically from `user_posts.js`.  
-- 🧱 **Layout Task:** Button-based navigation to layout demos.  
-- 👋 **Welcome Page:** Personalized greeting with name input.  
-
-### 💾 Persistent Storage  
-- Features like counter and slider values are saved using **AsyncStorage**.  
-
-### 📱 Responsive Design  
-- Works smoothly on both iOS and Android simulators with adaptive layouts.  
+Welcome to **My First App**, a sleek multi-screen React Native project crafted with **Expo Router**.  
+This app showcases essential mobile development principles including seamless navigation, persistent state management, and dynamic theming — all wrapped in a modern, user-friendly interface.
 
 ---
 
-## ⚙️ Tech Stack  
+## 🚀 Features
 
-| Library / Tool | Purpose |
-|----------------|----------|
-| **React Native** | Core UI framework |
-| **Expo Router** | File-based navigation |
-| **React Navigation Drawer** | Sidebar navigation |
-| **React Context API** | Global theme management |
-| **AsyncStorage** | Local data persistence |
-| **Reanimated / Gesture Handler** | Smooth animations |
-| **Expo Go** | Easy development & testing |
+### 🎨 Global Light & Dark Theme
+
+- Powered by a custom `ThemeContext`.
+- Supports theme persistence with real-time updates to headers, text, and backgrounds.
+
+### 📱 Intuitive Tab Navigation
+
+- Navigate effortlessly via a stylish bottom tab bar, providing quick access to all main screens.
+
+### 🧠 Highlighted Screens
+
+- 🎨 **Colorizer:** Interactive RGB sliders for live color mixing and visualization.
+- 🎯 **Tiles Game:** Engaging memory-matching tiles with smooth win animations.
+- 🔢 **Counter:** Smart increment/decrement functionality with persistent storage using AsyncStorage.
+
+### 🧩 Additional Screens
+
+- 😊 **Alert Form:** Mood input with emoji selection and pop-up alerts.
+- 💬 **Reviews:** Dynamic user posts display.
+- 👋 **Welcome Page:** Personalized greetings with name input.
+
+### 💾 Persistent Storage
+
+- Key features like the counter and color sliders retain their state across sessions using **AsyncStorage**.
+
+### 📱 Responsive & Modern Design
+
+- Optimized for both iOS and Android simulators with adaptive layouts and fluid animations.
 
 ---
 
-## 📂 Folder Structure  
+## 🌟 Latest Update (Expo Router Tabs)
 
-my_first_app/
-│
-├── app/
-│   ├── _layout.jsx
-│   ├── index.jsx
-│   ├── welcome.jsx
-│   ├── layout_task.jsx
-│   ├── alertform.jsx
-│   ├── countonclick.jsx
-│   ├── rgbcolor.jsx
-│   ├── tiles.jsx
-│   ├── reviews.jsx
-│   ├── layout1.jsx → layout4.jsx
-│
-├── components/
-│   └── ThemeModal.jsx
-│
-├── constants/
-│   └── themes.js
-│
-├── context/
-│   └── ThemeContext.js
-│
-├── data/
-│   └── user_posts.js
-│
-├── package.json
+This app has transitioned from drawer-based navigation to a **bottom tab navigation system** using Expo Router’s powerful tab routing features.  
+This update enhances usability by providing a consistent and accessible navigation experience across all screens, aligning with modern mobile UI standards.
+
+---
+
+## ⚙️ Tech Stack
+
+| Library / Tool                   | Purpose                           |
+| -------------------------------- | --------------------------------- |
+| **React Native**                 | Core UI framework                 |
+| **Expo Router**                  | File-based routing & tabs         |
+| **React Navigation Tabs**        | Bottom tab navigation             |
+| **React Context API**            | Global theme management           |
+| **AsyncStorage**                 | Local data persistence            |
+| **Reanimated / Gesture Handler** | Smooth animations                 |
+| **Expo Go**                      | Streamlined development & testing |
+
+---
+
+## 📂 Folder Structure
+
+my_first_app/  
+│  
+├── app/  
+│ ├── \_layout.jsx  
+│ ├── index.jsx  
+│ ├── welcome.jsx  
+│ ├── alertform.jsx  
+│ ├── countonclick.jsx  
+│ ├── rgbcolor.jsx  
+│ ├── tiles.jsx  
+│ ├── reviews.jsx  
+│ ├── layout_task.jsx  
+│  
+├── components/  
+│ └── ThemeModal.jsx  
+│  
+├── constants/  
+│ └── themes.js  
+│  
+├── context/  
+│ └── ThemeContext.js  
+│  
+├── data/  
+│ └── user_posts.js  
+│  
+├── package.json  
 └── README.md
 
 ---
 
-## 🛠️ Installation & Setup  
+## 🛠️ Installation & Setup
 
-1. **Clone the repo**  
+1. **Clone the repo**
+
    ```bash
    git clone https://github.com/YashDev-Design/My_First_APP.git
    cd My_First_APP
+   ```
 
-	2.	Install dependencies
+2. **Install dependencies**
 
-npm install
+   ```bash
+   npm install
+   ```
 
+3. **Start Expo**
 
-	3.	Start Expo
+   ```bash
+   npx expo start
+   ```
 
-npx expo start
+4. **Run the app**
+   - Press `i` → iOS Simulator
+   - Press `a` → Android Emulator
+   - Or scan the QR code using Expo Go
 
+---
 
-	4.	Run the app
-	•	Press i → iOS Simulator
-	•	Press a → Android Emulator
-	•	Or scan the QR code using Expo Go
+## 🎨 Theme System
 
-⸻
+This app uses a centralized `ThemeContext` to manage light and dark modes globally.  
+Each screen dynamically adapts to the selected theme, ensuring a consistent and polished user experience.
 
-🎨 Theme System
-
-This app uses a ThemeContext to manage color themes globally.
-Each screen adapts automatically to the selected theme.
-
+```jsx
 const { theme } = useTheme();
 
 <View style={{ backgroundColor: theme.background }}>
   <Text style={{ color: theme.text }}>Hello World</Text>
-</View>
+</View>;
+```
 
+---
 
-⸻
+## 🧠 Learning Outcomes
 
-🧠 Learning Outcomes
-	•	Building multi-screen mobile apps with Expo Router.
-	•	Implementing light/dark themes with React Context.
-	•	Managing persistent state using AsyncStorage.
-	•	Designing modular, responsive, and user-friendly layouts.
+- Building multi-screen mobile applications with Expo Router tab navigation.
+- Implementing robust light/dark themes using React Context API.
+- Managing persistent state with AsyncStorage for a seamless user experience.
+- Designing modular, responsive, and accessible layouts optimized for mobile devices.
 
-⸻
+---
 
-👨‍💻 Author
+## 👨‍💻 Author
 
-Javeed Mohammad (Yash-Dev)
-🎓 Graduate Student — Auburn University at Montgomery (AUM)
-💼 Student Affairs Social Media & Marketing Assistant
+Javeed Mohammad (Yash-Dev)  
+🎓 Graduate Student — Auburn University at Montgomery (AUM)  
+💼 Student Affairs Social Media & Marketing Assistant  
 🌐 GitHub: YashDev-Design
 
-⸻
+---
