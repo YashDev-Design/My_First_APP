@@ -6,7 +6,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { Colors } from "../constants/colors";
+import { Colors } from "../../constants/colors";
 
 const LayoutTask = () => {
   const router = useRouter();

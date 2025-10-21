@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import Slider from "@react-native-community/slider";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../../context/ThemeContext";
 
 const CountOnClick = () => {
   const { theme } = useTheme();

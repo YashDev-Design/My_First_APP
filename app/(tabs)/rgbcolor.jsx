@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, TextInput, Switch } from "react-native";
 import Slider from "@react-native-community/slider";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../../context/ThemeContext";
 
 const RGBColorMixer = () => {
   const [red, setRed] = useState(128);
