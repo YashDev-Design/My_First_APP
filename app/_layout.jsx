@@ -11,11 +11,12 @@ import Home from "./index";
 import About from "./about";
 import Designs from "./designs";
 import Welcome from "./welcome";
-// import LayoutTask from "./layout_task";
+//import LayoutTask from "./layout_task";
 import Reviews from "./reviews";
-import RgbColor from "../../rgbcolor";
-// import Tiles from "../../tiles";
+import RgbColor from "./rgbcolor";
+import Tiles from "./tiles";
 import AlertForm from "./alertform";
+import CountOnClick from "./countonclick";
 
 const Drawer = createDrawerNavigator();
 
@@ -49,9 +50,9 @@ const DrawerNavigator = () => {
         <Drawer.Screen name="Welcome" component={Welcome} />
         {/* <Drawer.Screen name="Layout Task" component={LayoutTask} /> */}
         <Drawer.Screen name="User Reviews" component={Reviews} />
-        {/* <Drawer.Screen name="Count On Click" component={CountOnClick} />
+        <Drawer.Screen name="Count On Click" component={CountOnClick} />
         <Drawer.Screen name="RGB Picker" component={RgbColor} />
-        <Drawer.Screen name="Tiles Game" component={Tiles} /> */}
+        <Drawer.Screen name="Tiles Game" component={Tiles} />
         <Drawer.Screen name="Alert Form" component={AlertForm} />
       </Drawer.Navigator>
 
