@@ -49,7 +49,7 @@ export default function DrawerLayout() {
 
   return (
     <>
-      <Drawer.Navigator screenOptions={screenOptions} initialRouteName="Drawer 1">
+      <Drawer.Navigator screenOptions={screenOptions} initialRouteName="Drawer A">
         <Drawer.Screen
           name="Home"
           component={GoHome}
@@ -61,7 +61,7 @@ export default function DrawerLayout() {
           options={{ title: "Drawer A" }}
         />
         <Drawer.Screen
-          name="Drawer B  "
+          name="Drawer B"
           component={DrawerB}
           options={{ title: "Drawer B" }}
         />
