@@ -17,7 +17,7 @@ import RgbColor from "./rgbcolor";
 import Tiles from "./tiles";
 import AlertForm from "./alertform";
 import CountOnClick from "./countonclick";
-
+import DrawerLayout from "./(drawer)/_layout";
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
@@ -54,6 +54,12 @@ const DrawerNavigator = () => {
         <Drawer.Screen name="RGB Picker" component={RgbColor} />
         <Drawer.Screen name="Tiles Game" component={Tiles} />
         <Drawer.Screen name="Alert Form" component={AlertForm} />
+        {/* Nested Drawer entry; child handles its own header */}
+        <Drawer.Screen
+          name="Drawer"
+          component={DrawerLayout}
+          options={{ headerShown: false }}
+        />
       </Drawer.Navigator>
 
       <ThemeModal
